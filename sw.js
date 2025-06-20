@@ -25,3 +25,15 @@ if (workbox) {
 } else {
   console.log('❌ Workbox failed to load');
 }
+
+ workbox.routing.registerRoute(
+    ({request}) => request.destination === 'image',
+    new workbox.strategies.CacheFirst({
+      cacheName: 'image-cache',
+      plugins: [
+        new workbox.expiration.ExpirationPlugin({
+          maxEntries: 50,
+        }),
+      ],
+    })
+  );
