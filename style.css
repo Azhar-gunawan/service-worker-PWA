@@ -58,5 +58,5 @@
     @media (max-width: 480px) {
       h1 { font-size: 1.5em; }
       p  { font-size: 1em; }
-      #installBtn { font-size: 0.9em; padding: 10px 20px; }
+      #installBtn { font-size: 0.9em; padding: 10px 100px; }
     }
