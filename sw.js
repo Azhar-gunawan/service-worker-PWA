@@ -1,6 +1,4 @@
-const CACHE_NAME = 'my-pwa-cache-v2'; 
-
-importScrimportScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js');
 
 if (workbox) {
   console.log('✅ Workbox loaded');
@@ -15,7 +13,7 @@ if (workbox) {
     { url: '/images/icon.png', revision: null }
   ]);
 
-  // 📌 Fallback untuk dokumen saat offline
+  // Fallback offline jika gagal fetch dokumen
   workbox.routing.setCatchHandler(async ({ event }) => {
     if (event.request.destination === 'document') {
       return caches.match('/offline.html');
