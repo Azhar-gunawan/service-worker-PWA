@@ -71,12 +71,17 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 window.addEventListener('offline', () => {
   Swal.fire({
-    title: 'Koneksi Terputus',
-    text: 'Kamu sedang offline. Beberapa fitur mungkin tidak tersedia.',
     icon: 'warning',
-    confirmButtonText: 'OK'
+    title: '⚠️ Tidak Ada Koneksi',
+    text: 'Kamu masuk ke mode offline.',
+    confirmButtonText: 'Buka Offline Mode'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = '/offline.html';
+    }
   });
 });
+
 
 
 if ('serviceWorker' in navigator) {
