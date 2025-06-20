@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <title>Offline Mode</title>
   <style>
     body { text-align: center; font-family: sans-serif; padding: 2em; background: #eee; }
@@ -13,5 +14,22 @@
   <h1>⚠️ Kamu sedang offline</h1>
   <p>Pastikan koneksi internet aktif untuk mengakses konten penuh.</p>
   <img src="images/icon-offline.gif" alt="Offline Icon">
+
+  <script>
+    window.addEventListener('online', () => {
+      Swal.fire({
+        title: '🔌 Anda Sudah Kembali Online',
+        text: 'Aplikasi akan kembali ke halaman utama',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/index.html';
+        }
+      });
+    });
+    
+  </script>
 </body>
 </html>
