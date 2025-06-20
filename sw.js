@@ -10,7 +10,8 @@ if (workbox) {
     { url: '/app.js', revision: null },
     { url: '/manifest.json', revision: null },
     { url: '/offline.html', revision: null },
-    { url: '/images/icon.png', revision: null }
+    { url: '/images/icon.png', revision: null },
+    { url: '/images/icon-offline.gif', revision: null }
   ]);
 
   // Fallback offline jika gagal fetch dokumen
