@@ -27,38 +27,47 @@ if ('serviceWorker' in navigator) {
 }
 
 let deferredPrompt;
+let installClicked = false;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // cegah prompt bawaan
+  e.preventDefault(); // cegah prompt default
   deferredPrompt = e;
 
   const installBtn = document.getElementById("installBtn");
   installBtn.style.display = "block";
 
-  installBtn.addEventListener('click', () => {
-    Swal.fire({
-      title: 'Install Aplikasi?',
-      text: 'Kamu bisa menggunakan aplikasi ini secara offline.',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Install',
-      cancelButtonText: 'Batal',
-      backdrop: true,
-    }).then((result) => {
-      if (result.isConfirmed && deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(choiceResult => {
-          if (choiceResult.outcome === 'accepted') {
-            Swal.fire('Berhasil!', 'Aplikasi berhasil di-install.', 'success');
-          } else {
-            Swal.fire('Batal', 'Instalasi dibatalkan.', 'info');
-          }
-          deferredPrompt = null;
-        });
-      }
+  // Cegah multiple binding
+  if (!installClicked) {
+    installClicked = true;
+
+    installBtn.addEventListener('click', () => {
+      Swal.fire({
+        title: 'Install Aplikasi?',
+        text: 'Kamu bisa menggunakan aplikasi ini secara offline.',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Install',
+        cancelButtonText: 'Batal',
+        backdrop: true,
+      }).then((result) => {
+        if (result.isConfirmed && deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+              Swal.fire('Berhasil!', 'Aplikasi berhasil di-install.', 'success');
+            } else {
+              Swal.fire('Batal', 'Instalasi dibatalkan.', 'info');
+            }
+            deferredPrompt = null;
+          });
+        } else {
+          Swal.fire('Batal', 'Instalasi dibatalkan.', 'info');
+        }
+      });
     });
-  });
+  }
 });
+
 
 window.addEventListener('offline', () => {
   Swal.fire({
