@@ -11,7 +11,8 @@ if (workbox) {
     { url: '/manifest.json', revision: null },
     { url: '/offline.html', revision: null },
     { url: '/images/icon.png', revision: null },
-    { url: '/images/icon-offline.gif', revision: null }
+    { url: '/images/icon-offline.gif', revision: null },
+    { url: '/online.js', revision: null }
   ]);
 
   // Fallback offline jika gagal fetch dokumen
